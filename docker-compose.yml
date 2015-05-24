@@ -1,0 +1,6 @@
+dev:
+  build: .
+  volumes:
+    - .:/go/src/github.com/jad-b/pla-go
+  tty: true
+  stdin_open: true
