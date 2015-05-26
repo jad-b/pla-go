@@ -15,6 +15,27 @@ var (
 	baseURL string
 )
 
+func TestHelloWorldHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", baseURL, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+	api.HelloWorldHandler(rr, req)
+
+	var response api.HelloWorld
+	err = json.Unmarshal(rr.Body.Bytes(), &response)
+	if err != nil {
+		t.Error("Failed to unmarshal JSON")
+
+	} else if response.Msg != "Hello, world!" {
+		t.Error("YOU NEED TO SAY HELLO")
+	} else if &response.Day == nil {
+		t.Error("Didnt get back the current time")
+
+	}
+}
+
 func TestEchoHandler(t *testing.T) {
 	req, err := http.NewRequest("GET", baseURL, nil)
 	if err != nil {
