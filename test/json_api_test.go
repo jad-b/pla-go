@@ -12,7 +12,11 @@ import (
 )
 
 var (
-	baseURL string
+	baseURL = "127.0.0.1"
+	tests   = []struct {
+		in  string
+		out string
+	}{}
 )
 
 func TestHelloWorldHandler(t *testing.T) {
@@ -30,9 +34,6 @@ func TestHelloWorldHandler(t *testing.T) {
 
 	} else if response.Msg != "Hello, world!" {
 		t.Error("YOU NEED TO SAY HELLO")
-	} else if &response.Day == nil {
-		t.Error("Didnt get back the current time")
-
 	}
 }
 
